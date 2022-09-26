@@ -1,0 +1,54 @@
+package br.com.jessicacorp.ecommerce.service;
+
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import br.com.jessicacorp.ecommerce.dao.DepartamentoDAO;
+import br.com.jessicacorp.ecommerce.model.Departamento;
+
+
+@Service
+public class DepartamentoServiceImpl implements IDepartamentoService {
+	
+	@Autowired
+	private DepartamentoDAO dao;
+	
+	@Override
+	public Departamento criarNovo(Departamento novo) {
+		// TODO Auto-generated method stub
+		if(novo.getNome()!= null) {
+			return dao.save(novo);
+		}
+		return null;
+	}
+
+	@Override
+	public Departamento atualizarDados(Departamento dados) {
+		// TODO Auto-generated method stub
+		if(dados.getNumero()!= null && dados.getNome()!= null) {
+			return dao.save(dados);
+		}
+		return null;
+	}
+
+	@Override
+	public ArrayList<Departamento> buscarTodos() {
+		// TODO Auto-generated method stub
+		return (ArrayList<Departamento>)dao.findAll();
+	}
+
+	@Override
+	public Departamento buscarPeloID(Integer id) {
+		// TODO Auto-generated method stub
+		return dao.findById(id).orElse(null);
+	}
+
+	@Override
+	public void excluirDepartamento(Integer id) {
+		// TODO Auto-generated method stub
+		dao.deleteById(id);
+	}
+
+}
